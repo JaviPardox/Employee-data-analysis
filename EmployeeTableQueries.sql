@@ -13,4 +13,16 @@ CREATE TABLE employee_1986 AS
 	SELECT employees.first_name, employees.last_name, employees.hire_date
 	FROM employees
 	WHERE hire_date >= '1986-01-01'::date AND hire_date <= '1986-12-31'::date;
+	
+DROP TABLE managers;	
+
+CREATE TABLE managers AS
+	SELECT employees.emp_no, employees.last_name, employees.first_name, dept_manager.dept_no, departments.dept_name
+	FROM employees
+	INNER JOIN dept_manager ON employees.emp_no=dept_manager.emp_no
+	INNER JOIN departments ON dept_manager.dept_no=departments.dept_no
+	ORDER BY emp_no ASC;
+
+SELECT * FROM managers;
+
 
