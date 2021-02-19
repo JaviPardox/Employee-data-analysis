@@ -6,8 +6,8 @@ DROP TABLE employee_details;
 CREATE TABLE employee_details AS
 	SELECT employees.emp_no, employees.last_name, employees.first_name, employees.sex, salaries.salary
 	FROM employees
-	INNER JOIN dept_emp ON employees.emp_no=dept_emp.emp_no
-	INNER JOIN salaries ON employees.emp_no=salaries.emp_no
+	INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
+	INNER JOIN salaries ON employees.emp_no = salaries.emp_no
 	ORDER BY emp_no ASC;
 
 -- Proceed to delete all the rows with matching employee's numbers between managers and employees in order to delete all the manager's rows.
@@ -47,8 +47,8 @@ DROP TABLE managers;
 CREATE TABLE managers AS
 	SELECT dept_manager.dept_no, departments.dept_name, employees.emp_no, employees.last_name, employees.first_name  
 	FROM employees
-	INNER JOIN dept_manager ON employees.emp_no=dept_manager.emp_no
-	INNER JOIN departments ON dept_manager.dept_no=departments.dept_no
+	INNER JOIN dept_manager ON employees.emp_no = dept_manager.emp_no
+	INNER JOIN departments ON dept_manager.dept_no = departments.dept_no
 	ORDER BY emp_no ASC;
 
 ---------------------------
@@ -60,8 +60,8 @@ DROP TABLE employee_department;
 CREATE TABLE employee_department AS
 	SELECT employees.emp_no, employees.last_name, employees.first_name, departments.dept_name
 	FROM employees
-	INNER JOIN dept_emp ON employees.emp_no=dept_emp.emp_no
-	INNER JOIN departments ON dept_emp.dept_no=departments.dept_no
+	INNER JOIN dept_emp ON employees.emp_no = dept_emp.emp_no
+	INNER JOIN departments ON dept_emp.dept_no = departments.dept_no
 	ORDER BY emp_no ASC;
 
 -- Delete all managers from the list by comparing emp_no
@@ -71,5 +71,24 @@ USING dept_manager
 WHERE employee_department.emp_no = dept_manager.emp_no;
 	
 ---------------------------	
+
+-- This section shows employees which are named Hercules and their last name starts with a B
+DROP TABLE employees_Hercules;
+
+-- Create table with employees called Hercules and with their last name staring with B
+CREATE TABLE employees_Hercules AS
+	SELECT employees.first_name, employees.last_name, employees.sex, employees.emp_no
+	FROM employees
+	WHERE first_name = 'Hercules' AND last_name ~ '^B';
 	
---SELECT * FROM employee_department;
+-- Delete all managers from the list by comparing emp_no
+DELETE 
+FROM employee_department 
+USING dept_manager 
+WHERE employee_department.emp_no = dept_manager.emp_no;
+
+-- Drop emp_no column because it's not needed
+ALTER TABLE employees_Hercules
+DROP COLUMN emp_no;
+	
+SELECT * FROM employees_Hercules;
