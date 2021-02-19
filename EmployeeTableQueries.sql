@@ -91,4 +91,24 @@ WHERE employee_department.emp_no = dept_manager.emp_no;
 ALTER TABLE employees_Hercules
 DROP COLUMN emp_no;
 	
-SELECT * FROM employees_Hercules;
+---------------------------
+
+-- This section shows employees that are in the Sales department 
+DROP TABLE employees_sales;
+
+-- Create table with all the employees that are in the Sales department
+CREATE TABLE employees_sales AS
+	SELECT dept_emp.emp_no, employees.last_name, employees.first_name, departments.dept_name
+	FROM dept_emp
+	INNER JOIN employees ON employees.emp_no = dept_emp.emp_no
+	INNER JOIN departments ON departments.dept_name = 'Sales' AND departments.dept_no = dept_emp.dept_no;
+
+-- Delete all managers from the list by comparing emp_no
+DELETE 
+FROM employees_sales
+USING dept_manager 
+WHERE employees_sales.emp_no = dept_manager.emp_no;
+
+---------------------------
+	
+SELECT * FROM employees_sales;
