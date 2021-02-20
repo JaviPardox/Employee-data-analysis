@@ -1,5 +1,7 @@
-DROP TABLE departments,dept_emp,dept_manager,employees,salaries,titles CASCADE;
+-- Uncomment if file is ran more than once
+-- DROP TABLE departments,dept_emp,dept_manager,employees,salaries,titles CASCADE;
 
+-- Create all tables to be used
 
 CREATE TABLE departments (
 	dept_no VARCHAR NOT NULL,
@@ -25,7 +27,6 @@ CREATE TABLE employees (
 	PRIMARY KEY (emp_no)
 );
 
-
 CREATE TABLE dept_emp(	
 	emp_no INT NOT NULL,
 	dept_no VARCHAR NOT NULL,
@@ -50,8 +51,39 @@ CREATE TABLE salaries(
 	PRIMARY KEY (emp_no)
 );
 
+-- Queries to import data from csv files
+-- ADD YOUR PATH AND UNCOMMENT TO USE
+/*
+COPY departments(dept_no, dept_name)
+FROM 'C:\INSERT YOUR PATH HERE\departments.csv'
+DELIMITER ','
+CSV HEADER;
 
+COPY titles(title_id, title)
+FROM 'C:\INSERT YOUR PATH HERE\titles.csv'
+DELIMITER ','
+CSV HEADER;
 
+COPY employees(emp_no, emp_title_id, birth_date, first_name, last_name, sex, hire_date)
+FROM 'C:\INSERT YOUR PATH HERE\employees.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY dept_emp(emp_no, dept_no)
+FROM 'C:\INSERT YOUR PATH HERE\dept_emp.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY dept_manager(dept_no, emp_no)
+FROM 'C:\INSERT YOUR PATH HERE\dept_manager.csv'
+DELIMITER ','
+CSV HEADER;
+
+COPY salaries(emp_no, salary)
+FROM 'C:\INSERT YOUR PATH HERE\salaries.csv'
+DELIMITER ','
+CSV HEADER;
+*/
 
 
 
