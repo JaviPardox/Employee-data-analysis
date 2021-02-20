@@ -1,5 +1,6 @@
 
--- This section is to create a table that holds information about the employees, leaving the managers out	
+-- This section is to create a table that holds information about the employees, leaving the managers out
+
 DROP TABLE employee_details;
 
 -- Table that holds all the employees information, including managers
@@ -19,6 +20,7 @@ WHERE employee_details.emp_no = dept_manager.emp_no;
 ---------------------------
 
 -- This section is to find all employees, leaving all managers out, that are hired in 1986
+
 DROP TABLE employee_1986;
 
 -- Find all employees hired in the year 1986
@@ -41,6 +43,7 @@ DROP COLUMN emp_no;
 ---------------------------
 
 -- This section is to find all manager's information
+
 DROP TABLE managers;	
 
 -- Find all managers information and store it into a table
@@ -54,6 +57,7 @@ CREATE TABLE managers AS
 ---------------------------
 
 -- This section shows the employee's department information, plus first and last name
+
 DROP TABLE employee_department;
 
 -- Create table with all the information
@@ -73,6 +77,7 @@ WHERE employee_department.emp_no = dept_manager.emp_no;
 ---------------------------	
 
 -- This section shows employees which are named Hercules and their last name starts with a B
+
 DROP TABLE employees_Hercules;
 
 -- Create table with employees called Hercules and with their last name staring with B
@@ -93,7 +98,8 @@ DROP COLUMN emp_no;
 	
 ---------------------------
 
--- This section shows employees that are in the Sales department 
+-- This section shows employees that are in the Sales department
+
 DROP TABLE employees_sales;
 
 -- Create table with all the employees that are in the Sales department
@@ -111,7 +117,8 @@ WHERE employees_sales.emp_no = dept_manager.emp_no;
 
 ---------------------------
 
--- This section shows employees that are in the Sales or Development departments 
+-- This section shows employees that are in the Sales or Development departments
+
 DROP TABLE employees_sales_development;
 
 -- Create table with all the employees that are in the Development or Sales department
@@ -127,8 +134,21 @@ FROM employees_sales_development
 USING dept_manager 
 WHERE employees_sales_development.emp_no = dept_manager.emp_no;
 
+---------------------------
 
-SELECT * FROM employees_sales_development;
+-- This section is to find the frequency of each last name from the employees
+
+DROP TABLE employees_lastname_count;
+
+-- Create table with the count of each unique last name
+CREATE TABLE employees_lastname_count AS
+	SELECT employees.last_name,
+	COUNT (employees.last_name)
+	FROM employees
+	GROUP BY employees.last_name
+	ORDER BY count DESC;
+
+SELECT * FROM employees_lastname_count;
 
 
 
