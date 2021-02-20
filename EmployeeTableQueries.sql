@@ -110,5 +110,29 @@ USING dept_manager
 WHERE employees_sales.emp_no = dept_manager.emp_no;
 
 ---------------------------
+
+-- This section shows employees that are in the Sales or Development departments 
+DROP TABLE employees_sales_development;
+
+-- Create table with all the employees that are in the Development or Sales department
+CREATE TABLE employees_sales_development AS
+	SELECT dept_emp.emp_no, employees.last_name, employees.first_name, departments.dept_name
+	FROM dept_emp
+	INNER JOIN employees ON employees.emp_no = dept_emp.emp_no
+	INNER JOIN departments ON (departments.dept_name = 'Sales' OR departments.dept_name = 'Development') AND departments.dept_no = dept_emp.dept_no;
 	
-SELECT * FROM employees_sales;
+-- Delete all managers from the list by comparing emp_no
+DELETE 
+FROM employees_sales_development
+USING dept_manager 
+WHERE employees_sales_development.emp_no = dept_manager.emp_no;
+
+
+SELECT * FROM employees_sales_development;
+
+
+
+
+
+
+
