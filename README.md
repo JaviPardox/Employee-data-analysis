@@ -1,4 +1,4 @@
-# Employee's database SQL queries
+# Employee's data analysis
 
 The main goal of this project is to get to know about Postgresql, to create and managade databases, to understand queries, specially keys and joins. 
 
